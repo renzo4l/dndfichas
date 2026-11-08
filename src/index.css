@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Cinzel', 'IM Fell English', 'Georgia', serif;
+  --font-scripture: 'IM Fell English', 'Cinzel', 'Georgia', serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-cinzel-dec: 'Cinzel Decorative', 'Cinzel', serif;
+  --font-medieval: 'MedievalSharp', cursive;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-serif);
+  background-color: #140d08;
+  background-image: 
+    linear-gradient(to bottom, rgba(18, 13, 9, 0.86), rgba(24, 17, 12, 0.90)), 
+    url('/assets/aistudio/image_a6485934.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  color: #f4ecd8;
+  min-height: 100vh;
+  letter-spacing: 0.015em;
+}
+
+/* Parchment Texture Mesa & Container Styling */
+.parchment-mesa {
+  background-image: linear-gradient(to bottom, rgba(24, 17, 12, 0.92), rgba(30, 20, 13, 0.95)), url('/assets/aistudio/image_a6485934.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.parchment-sheet {
+  background-image: linear-gradient(to bottom, rgba(247, 238, 220, 0.96), rgba(234, 219, 195, 0.97)), url('/assets/aistudio/image_a6485934.png');
+  background-size: cover;
+  background-position: center;
+  color: #2b1810;
+}
+
+.parchment-card {
+  background-image: linear-gradient(to bottom, rgba(30, 20, 13, 0.95), rgba(24, 16, 11, 0.98)), url('/assets/aistudio/image_a6485934.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Custom scrollbar for RPG archaic parchment feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #15110d;
+}
+::-webkit-scrollbar-thumb {
+  background: #423221;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Remove spin buttons / arrows globally from number inputs (Opção 1) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button,
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+  display: none !important;
+}
+
+input[type="number"],
+.no-spinners {
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
