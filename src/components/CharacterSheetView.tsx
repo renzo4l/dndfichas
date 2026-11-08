@@ -900,7 +900,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
     badge?: React.ReactNode,
     actionButtons?: React.ReactNode
   ) => {
-    const isCollapsed = collapsedCategories[cardId] ?? false;
+    const isCollapsed = isCardCollapsed(cardId);
 
     return (
       <div className="flex items-center justify-between border-b-2 border-[#54412c]/60 pb-2.5 mb-3 select-none">
@@ -5114,19 +5114,13 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                     <button
                       type="button"
                       onClick={() => handleToggleCategoryCollapse('combate')}
-                      className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer flex-shrink-0"
+                      className="p-1 rounded bg-[#24170e] hover:bg-[#382619] text-[#eedbc5] border border-[#54412c] transition cursor-pointer flex items-center justify-center flex-shrink-0"
                       title={isCardCollapsed('combate') ? 'Expandir card de combate' : 'Reduzir card de combate para economizar espaço'}
                     >
                       {isCardCollapsed('combate') ? (
-                        <>
-                          <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
-                          <span>Expandir</span>
-                        </>
+                        <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
                       ) : (
-                        <>
-                          <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
-                          <span>Reduzir</span>
-                        </>
+                        <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
                       )}
                     </button>
                   </div>
@@ -5345,19 +5339,13 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                     <button
                       type="button"
                       onClick={() => handleToggleCategoryCollapse('habilidades')}
-                      className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer flex-shrink-0"
+                      className="p-1 rounded bg-[#24170e] hover:bg-[#382619] text-[#eedbc5] border border-[#54412c] transition cursor-pointer flex items-center justify-center flex-shrink-0"
                       title={isCardCollapsed('habilidades') ? 'Expandir card de habilidades' : 'Reduzir card de habilidades para economizar espaço'}
                     >
                       {isCardCollapsed('habilidades') ? (
-                        <>
-                          <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
-                          <span>Expandir</span>
-                        </>
+                        <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
                       ) : (
-                        <>
-                          <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
-                          <span>Reduzir</span>
-                        </>
+                        <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
                       )}
                     </button>
                   </div>
@@ -5727,19 +5715,13 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                       <button
                         type="button"
                         onClick={() => handleToggleCategoryCollapse('magias')}
-                        className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer flex-shrink-0"
+                        className="p-1 rounded bg-[#24170e] hover:bg-[#382619] text-[#eedbc5] border border-[#54412c] transition cursor-pointer flex items-center justify-center flex-shrink-0"
                         title={isCardCollapsed('magias') ? 'Expandir card de magias' : 'Reduzir card de magias para economizar espaço'}
                       >
                         {isCardCollapsed('magias') ? (
-                          <>
-                            <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
-                            <span>Expandir</span>
-                          </>
+                          <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
                         ) : (
-                          <>
-                            <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
-                            <span>Reduzir</span>
-                          </>
+                          <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
                         )}
                       </button>
                     </div>
@@ -6031,19 +6013,13 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                         <button
                           type="button"
                           onClick={() => handleToggleCategoryCollapse('inventario')}
-                          className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer flex-shrink-0"
+                          className="p-1 rounded bg-[#24170e] hover:bg-[#382619] text-[#eedbc5] border border-[#54412c] transition cursor-pointer flex items-center justify-center flex-shrink-0"
                           title={isCardCollapsed('inventario') ? 'Expandir card de inventário' : 'Reduzir card de inventário para economizar espaço'}
                         >
                           {isCardCollapsed('inventario') ? (
-                            <>
-                              <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
-                              <span>Expandir</span>
-                            </>
+                            <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
                           ) : (
-                            <>
-                              <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
-                              <span>Reduzir</span>
-                            </>
+                            <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
                           )}
                         </button>
                       </div>
@@ -6451,19 +6427,13 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                     <button
                       type="button"
                       onClick={() => handleToggleCategoryCollapse('biografia')}
-                      className="flex items-center gap-1 px-2.5 py-1 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer"
+                      className="p-1 rounded bg-[#24170e] hover:bg-[#382619] text-[#eedbc5] border border-[#54412c] transition cursor-pointer flex items-center justify-center"
                       title={isCardCollapsed('biografia') ? 'Expandir card de biografia' : 'Reduzir card de biografia para economizar espaço'}
                     >
                       {isCardCollapsed('biografia') ? (
-                        <>
-                          <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
-                          <span>Expandir</span>
-                        </>
+                        <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
                       ) : (
-                        <>
-                          <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
-                          <span>Reduzir</span>
-                        </>
+                        <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
                       )}
                     </button>
                   </div>
@@ -6531,37 +6501,23 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                     {(character.activeConditions || []).length + ((character.exhaustionLevel || 0) > 0 ? 1 : 0)} Ativa(s)
                   </span>
                 ) : undefined,
-                <div className="flex items-center gap-1.5">
-                  {((character.activeConditions || []).length > 0 || (character.exhaustionLevel || 0) > 0) && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        onUpdateCharacter({
-                          ...character,
-                          activeConditions: [],
-                          exhaustionLevel: 0,
-                          updatedAt: new Date().toISOString(),
-                        });
-                      }}
-                      className="px-2 py-0.5 rounded bg-red-950/60 hover:bg-red-900 text-red-200 border border-red-800/60 text-[10px] font-serif font-bold transition cursor-pointer"
-                      title="Remover todas as condições e exaustão"
-                    >
-                      Limpar Todas
-                    </button>
-                  )}
+                ((character.activeConditions || []).length > 0 || (character.exhaustionLevel || 0) > 0) ? (
                   <button
                     type="button"
-                    onClick={() => handleToggleCategoryCollapse('condicoes')}
-                    className="p-1 rounded bg-[#24170e] hover:bg-[#382619] text-[#eedbc5] border border-[#54412c] transition cursor-pointer"
-                    title={isCardCollapsed('condicoes') ? 'Expandir condições' : 'Reduzir condições para economizar espaço'}
+                    onClick={() => {
+                      onUpdateCharacter({
+                        ...character,
+                        activeConditions: [],
+                        exhaustionLevel: 0,
+                        updatedAt: new Date().toISOString(),
+                      });
+                    }}
+                    className="px-2 py-0.5 rounded bg-red-950/60 hover:bg-red-900 text-red-200 border border-red-800/60 text-[10px] font-serif font-bold transition cursor-pointer"
+                    title="Remover todas as condições e exaustão"
                   >
-                    {isCardCollapsed('condicoes') ? (
-                      <ChevronDown className="w-3.5 h-3.5 text-[#c49d48]" />
-                    ) : (
-                      <ChevronUp className="w-3.5 h-3.5 text-[#c49d48]" />
-                    )}
+                    Limpar Todas
                   </button>
-                </div>
+                ) : undefined
               )}
 
               <div
