@@ -2001,10 +2001,42 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
 
           <button
             onClick={onCreateNewCharacter}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-xs shadow-md border border-[#e8c679]/40 transition active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-xs shadow-md border border-[#e8c679]/40 transition active:scale-95 cursor-pointer"
+            title="Criar uma nova ficha de personagem 100% limpa e vazia"
           >
             <Plus className="w-4 h-4" />
             <span>Novo Personagem</span>
+          </button>
+
+          {/* Botão de Redefinir/Limpar Ficha Atual caso o usuário queira esvaziar todos os dados mockados */}
+          <button
+            type="button"
+            onClick={() => {
+              if (window.confirm(`Deseja limpar todos os ataques, magias, habilidades, inventário e anotações de "${character.characterName}"? Esta ação deixará a ficha completamente vazia.`)) {
+                onUpdateCharacter({
+                  ...character,
+                  attacks: [],
+                  spells: [],
+                  featuresList: [],
+                  featuresAndTraits: '',
+                  inventoryList: [],
+                  equipment: '',
+                  backstory: '',
+                  personalityTraits: '',
+                  ideals: '',
+                  bonds: '',
+                  flaws: '',
+                  activeConditions: [],
+                  exhaustionLevel: 0,
+                  updatedAt: new Date().toISOString(),
+                });
+              }
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#201912] hover:bg-[#301f14] text-[#eedbc5] hover:text-red-300 font-serif font-bold text-xs transition border border-[#54412c] cursor-pointer"
+            title="Zerar ataques, magias, habilidades, inventário e anotações desta ficha"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-[#c49d48]" />
+            <span>Limpar Dados</span>
           </button>
         </div>
 
@@ -3401,17 +3433,17 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
               </label>
             </div>
 
-            {/* Campo Descrição Detalhada da Magia */}
+            {/* Campo Descrição Detalhada da Magia / Ritual */}
             <div className="space-y-1">
               <label className="text-xs font-sans font-bold text-[#f4ecd8] block">
-                Descrição Detalhada &amp; Efeitos Arcanos<span className="text-amber-400">*</span>
+                Descrição Detalhada &amp; Efeitos Arcanos / Mecânica do Ritual<span className="text-amber-400">*</span>
               </label>
               <textarea
                 value={spellDescription}
                 onChange={(e) => setSpellDescription(e.target.value)}
-                rows={4}
-                placeholder="Escreva a descrição completa da magia, testes de salvaguarda, efeitos em níveis superiores..."
-                className="w-full bg-[#1e1a17] border border-[#54412c] focus:border-[#c49d48] rounded-lg p-2.5 text-xs text-[#eedbc5] placeholder-[#6e5840] font-sans focus:outline-none transition"
+                rows={5}
+                placeholder="Escreva a descrição completa da magia/ritual, dano, testes de salvaguarda, efeitos em níveis superiores, componentes especiais..."
+                className="w-full bg-[#1e1a17] border border-[#54412c] focus:border-[#c49d48] rounded-lg p-2.5 text-xs text-[#eedbc5] placeholder-[#6e5840] font-sans focus:outline-none transition leading-relaxed min-h-[120px]"
               />
             </div>
 
@@ -5061,28 +5093,28 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
         case 'combate':
           return (
             <div className="bg-[#1a120b]/95 border-2 border-[#8c6b32]/60 rounded-2xl p-4 shadow-2xl space-y-3 select-none">
-                <div className="flex items-center justify-between border-b-2 border-[#54412c]/60 pb-2.5">
+                <div className="flex items-center justify-between gap-3 flex-wrap border-b-2 border-[#54412c]/60 pb-2.5">
                   <div className="flex items-center gap-2">
-                    <Swords className="w-4 h-4 text-[#e8c679]" />
+                    <Swords className="w-4 h-4 text-[#e8c679] flex-shrink-0" />
                     <span className="font-serif font-black text-xs sm:text-sm uppercase tracking-wider text-[#d4af37]">
                       Combate &amp; Ataques DE ARMA
                     </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#2a1d13] text-[#e8c679] border border-[#8c6b32] font-mono font-bold">
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="relative inline-flex items-center justify-center px-2.5 py-1 rounded-full bg-[#2a1d13] text-[#e8c679] border border-[#8c6b32] font-mono font-bold text-[0.7rem] whitespace-nowrap min-w-fit">
                       {character.attacks.length} ataque(s)
                     </span>
-                  </div>
-                  <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={handleOpenCreateAttackModal}
-                      className="flex items-center gap-1 px-2.5 py-1 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-[11px] rounded-lg shadow transition cursor-pointer"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-[0.75rem] rounded-lg shadow transition cursor-pointer whitespace-nowrap flex-shrink-0"
                     >
                       <Plus className="w-3.5 h-3.5" /> + Novo Ataque
                     </button>
                     <button
                       type="button"
                       onClick={() => handleToggleCategoryCollapse('combate')}
-                      className="flex items-center gap-1 px-2.5 py-1 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer flex-shrink-0"
                       title={isCardCollapsed('combate') ? 'Expandir card de combate' : 'Reduzir card de combate para economizar espaço'}
                     >
                       {isCardCollapsed('combate') ? (
@@ -5108,22 +5140,17 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                   }`}
                 >
                   {character.attacks.length === 0 ? (
-                    <div className="text-center py-8 px-4 bg-[#140d08] border-2 border-dashed border-[#54412c] rounded-2xl space-y-3">
-                      <div className="w-12 h-12 mx-auto rounded-full bg-[#24170e] border border-[#8c6b32]/60 flex items-center justify-center text-[#c49d48] shadow-inner">
-                        <Swords className="w-6 h-6" />
-                      </div>
-                      <p className="font-serif font-bold text-sm text-[#eedbc5]">
-                        Você ainda não possui ataques ou magias preparadas
-                      </p>
-                      <p className="text-xs text-[#8c7457] font-serif max-w-xs mx-auto">
-                        Adicione armas brancas, à distância, magias de ataque ou manobras especiais para usar em combate.
+                    <div className="text-center py-6 px-4 bg-[#140d08] border border-dashed border-[#54412c] rounded-xl space-y-2">
+                      <Swords className="w-6 h-6 text-[#8c7457] mx-auto opacity-60" />
+                      <p className="font-serif font-bold text-xs text-[#eedbc5]">
+                        Nenhum ataque ou arma configurada.
                       </p>
                       <button
                         type="button"
                         onClick={handleOpenCreateAttackModal}
-                        className="px-4 py-2 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-xs rounded-xl shadow-md border border-[#e8c679]/40 transition active:scale-95 inline-flex items-center gap-1.5 cursor-pointer"
+                        className="px-3 py-1.5 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-xs rounded-lg shadow-md border border-[#e8c679]/40 transition active:scale-95 inline-flex items-center gap-1.5 cursor-pointer"
                       >
-                        <Plus className="w-4 h-4" />
+                        <Plus className="w-3.5 h-3.5" />
                         <span>+ Novo Ataque / Ação</span>
                       </button>
                     </div>
@@ -5297,28 +5324,28 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
         case 'habilidades':
           return (
             <div className="bg-[#1a120b]/95 border-2 border-[#8c6b32]/60 rounded-2xl p-4 shadow-2xl space-y-3 select-none">
-                <div className="flex items-center justify-between border-b-2 border-[#54412c]/60 pb-2.5">
+                <div className="flex items-center justify-between gap-3 flex-wrap border-b-2 border-[#54412c]/60 pb-2.5">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#e8c679]" />
+                    <Sparkles className="w-4 h-4 text-[#e8c679] flex-shrink-0" />
                     <span className="font-serif font-black text-xs sm:text-sm uppercase tracking-wider text-[#d4af37]">
                       Habilidades &amp; Traços DE CLASSE / RAÇA
                     </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#2a1d13] text-[#e8c679] border border-[#8c6b32] font-mono font-bold">
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="relative inline-flex items-center justify-center px-2.5 py-1 rounded-full bg-[#2a1d13] text-[#e8c679] border border-[#8c6b32] font-mono font-bold text-[0.7rem] whitespace-nowrap min-w-fit">
                       {featuresList.length} habilidade(s)
                     </span>
-                  </div>
-                  <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={handleAddFeature}
-                      className="flex items-center gap-1 px-2.5 py-1 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-[11px] rounded-lg shadow transition cursor-pointer"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-[0.75rem] rounded-lg shadow transition cursor-pointer whitespace-nowrap flex-shrink-0"
                     >
                       <Plus className="w-3.5 h-3.5" /> + Nova Habilidade
                     </button>
                     <button
                       type="button"
                       onClick={() => handleToggleCategoryCollapse('habilidades')}
-                      className="flex items-center gap-1 px-2.5 py-1 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer flex-shrink-0"
                       title={isCardCollapsed('habilidades') ? 'Expandir card de habilidades' : 'Reduzir card de habilidades para economizar espaço'}
                     >
                       {isCardCollapsed('habilidades') ? (
@@ -5359,13 +5386,10 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
 
                     {/* Lista de Cards de Habilidades */}
                     {featuresList.length === 0 ? (
-                      <div className="text-center py-6 px-4 bg-[#120a06] border border-dashed border-[#54412c] rounded-lg space-y-2">
+                      <div className="text-center py-6 px-4 bg-[#120a06] border border-dashed border-[#54412c] rounded-xl space-y-2">
                         <Sparkles className="w-6 h-6 text-[#8c7457] mx-auto opacity-50" />
                         <p className="text-xs text-[#eedbc5] font-serif font-semibold">
-                          Nenhuma característica ou habilidade cadastrada.
-                        </p>
-                        <p className="text-[10px] text-[#8c7457] font-serif">
-                          Clique em "+ Nova Habilidade" acima para adicionar talentos, habilidades de classe ou raça.
+                          Nenhuma habilidade adicionada ainda. Clique em "+ Nova Habilidade".
                         </p>
                       </div>
                     ) : (
@@ -5497,9 +5521,10 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                                 {/* Card Header Expandível (exatamente no estilo CRIS da imagem de referência) */}
                                 <div
                                   onClick={() => handleToggleExpandFeature(feat.id)}
-                                  className="px-3.5 py-2.5 bg-[#1e150e] hover:bg-[#281b12] border-b border-[#54412c]/50 flex items-center justify-between cursor-pointer select-none transition"
+                                  className="px-3.5 py-2.5 bg-[#1e150e] hover:bg-[#281b12] border-b border-[#54412c]/50 flex items-center justify-between gap-2 cursor-pointer select-none transition"
                                 >
-                                  <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                                  {/* Lado esquerdo (Chevron + Título) */}
+                                  <div className="flex items-center gap-2 flex-1 min-w-0 flex-wrap">
                                     <button
                                       type="button"
                                       className="text-[#c49d48] hover:text-[#f4ecd8] transition flex-shrink-0"
@@ -5510,42 +5535,45 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                                         <ChevronUp className="w-4 h-4 text-[#c49d48]" />
                                       )}
                                     </button>
-                                    <h4 className="font-serif font-bold text-sm text-[#f4ecd8] group-hover:text-amber-300 transition truncate">
+                                    <h4 className="font-serif font-bold text-[#f4ecd8] group-hover:text-amber-300 transition text-[0.85rem] leading-[1.3] whitespace-normal">
                                       {feat.name}
                                     </h4>
+                                  </div>
+
+                                  {/* Lado direito (Badges de origem/recarga + Ações Editar/Remover) */}
+                                  <div className="flex items-center gap-1.5 flex-shrink-0 ml-auto">
                                     {feat.source && (
-                                      <span className="text-[10px] font-serif px-2 py-0.2 rounded bg-[#2a1d13] text-[#d4af37] border border-[#8c6b32]/40 hidden sm:inline-block truncate">
+                                      <span className="text-[0.65rem] font-serif px-1.5 py-0.5 rounded bg-[#2a1d13] text-[#d4af37] border border-[#8c6b32]/40 whitespace-nowrap">
                                         {feat.source}
                                       </span>
                                     )}
                                     {feat.cost && (
-                                      <span className="text-[10px] font-mono px-2 py-0.2 rounded bg-amber-950/80 text-amber-300 border border-amber-700/60 font-bold flex-shrink-0">
+                                      <span className="text-[0.65rem] font-mono px-1.5 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-700/60 font-bold whitespace-nowrap">
                                         {feat.cost}
                                       </span>
                                     )}
-                                  </div>
-
-                                  <div className="flex items-center gap-2 pl-2 flex-shrink-0">
-                                    <button
-                                      type="button"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleStartEditFeature(feat);
-                                      }}
-                                      className="text-[11px] font-serif font-bold text-emerald-400 hover:text-emerald-300 transition px-1.5 py-0.5 hover:bg-emerald-950/40 rounded cursor-pointer"
-                                    >
-                                      Editar
-                                    </button>
-                                    <button
-                                      type="button"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleRemoveFeature(feat.id);
-                                      }}
-                                      className="text-[11px] font-serif font-bold text-red-400 hover:text-red-300 transition px-1.5 py-0.5 hover:bg-red-950/40 rounded cursor-pointer"
-                                    >
-                                      Remover
-                                    </button>
+                                    <div className="flex items-center gap-1.5 pl-1 flex-shrink-0">
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleStartEditFeature(feat);
+                                        }}
+                                        className="text-[11px] font-serif font-bold text-emerald-400 hover:text-emerald-300 transition px-1.5 py-0.5 hover:bg-emerald-950/40 rounded cursor-pointer whitespace-nowrap"
+                                      >
+                                        Editar
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleRemoveFeature(feat.id);
+                                        }}
+                                        className="text-[11px] font-serif font-bold text-red-400 hover:text-red-300 transition px-1.5 py-0.5 hover:bg-red-950/40 rounded cursor-pointer whitespace-nowrap"
+                                      >
+                                        Remover
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
 
@@ -5678,28 +5706,28 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
 
               return (
                 <div className="bg-[#1a120b]/95 border-2 border-[#8c6b32]/60 rounded-2xl p-4 shadow-2xl space-y-3 select-none">
-                  <div className="flex items-center justify-between border-b-2 border-[#54412c]/60 pb-2.5">
+                  <div className="flex items-center justify-between gap-3 flex-wrap border-b-2 border-[#54412c]/60 pb-2.5">
                     <div className="flex items-center gap-2">
-                      <BookOpen className="w-4 h-4 text-[#e8c679]" />
+                      <BookOpen className="w-4 h-4 text-[#e8c679] flex-shrink-0" />
                       <span className="font-serif font-black text-xs sm:text-sm uppercase tracking-wider text-[#d4af37]">
                         Magias &amp; Grimório DE CONJURAÇÃO
                       </span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#2a1d13] text-[#e8c679] border border-[#8c6b32] font-mono font-bold">
+                    </div>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <span className="relative inline-flex items-center justify-center px-2.5 py-1 rounded-full bg-[#2a1d13] text-[#e8c679] border border-[#8c6b32] font-mono font-bold text-[0.7rem] whitespace-nowrap min-w-fit">
                         {allSpells.length} magia(s)
                       </span>
-                    </div>
-                    <div className="flex items-center gap-2">
                       <button
                         type="button"
                         onClick={handleOpenCreateSpellModal}
-                        className="flex items-center gap-1 px-2.5 py-1 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-[11px] rounded-lg shadow transition cursor-pointer"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-[0.75rem] rounded-lg shadow transition cursor-pointer whitespace-nowrap flex-shrink-0"
                       >
                         <Plus className="w-3.5 h-3.5" /> + Nova Magia
                       </button>
                       <button
                         type="button"
                         onClick={() => handleToggleCategoryCollapse('magias')}
-                        className="flex items-center gap-1 px-2.5 py-1 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer flex-shrink-0"
                         title={isCardCollapsed('magias') ? 'Expandir card de magias' : 'Reduzir card de magias para economizar espaço'}
                       >
                         {isCardCollapsed('magias') ? (
@@ -5724,12 +5752,12 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                         : 'max-h-[6000px] opacity-100'
                     }`}
                   >
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                      <div className="grid grid-cols-3 gap-2">
                         {/* Atributo de Conjuração */}
-                        <div className="bg-[#120a06] border border-[#54412c] rounded-lg p-2.5 flex flex-col justify-between min-w-0">
-                          <div className="flex items-center justify-between text-[10px] uppercase font-bold text-[#8c7457] font-serif">
-                            <span>Atributo Conjurar</span>
-                            <span className="text-[#e8c679] font-mono">{formatModifier(spellAbilityMod)}</span>
+                        <div className="bg-[#120a06] border border-[#54412c] rounded-lg p-2 flex flex-col justify-between min-w-0">
+                          <div className="flex items-center justify-between text-[0.7rem] uppercase font-bold text-[#8c7457] font-serif leading-[1.2] text-center w-full">
+                            <span className="whitespace-normal leading-[1.2]">Atributo Conjurar</span>
+                            <span className="text-[#e8c679] font-mono flex-shrink-0 ml-1">{formatModifier(spellAbilityMod)}</span>
                           </div>
                           <select
                             value={spellcastingAbilityKey}
@@ -5739,7 +5767,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                                 spellcastingAbility: e.target.value as AbilityName,
                               })
                             }
-                            className="mt-1 text-xs font-serif font-bold text-amber-200 bg-[#1a120b] border border-[#54412c] rounded p-1.5 focus:border-[#c49d48] focus:outline-none cursor-pointer w-full box-border"
+                            className="mt-1 text-xs font-serif font-bold text-amber-200 bg-[#1a120b] border border-[#54412c] rounded p-1 focus:border-[#c49d48] focus:outline-none cursor-pointer w-full box-border"
                           >
                             <option value="int">INT (Mago / Artífice)</option>
                             <option value="wis">SAB (Clérigo / Druida / Ranger)</option>
@@ -5751,22 +5779,22 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                         </div>
 
                         {/* CD de Salvaguarda */}
-                        <div className="bg-[#120a06] border border-[#54412c] rounded-lg p-2.5 text-center min-w-0">
-                          <span className="text-[10px] uppercase font-bold text-[#8c7457] font-serif block truncate">
+                        <div className="bg-[#120a06] border border-[#54412c] rounded-lg p-2 text-center min-w-0 flex flex-col justify-between">
+                          <span className="text-[0.7rem] uppercase font-bold text-[#8c7457] font-serif block whitespace-normal leading-[1.2] text-center">
                             CD de Salvaguarda
                           </span>
                           <span className="text-xl font-serif font-black text-amber-300 block my-0.5">
                             {spellDcVal}
                           </span>
-                          <span className="text-[9px] text-[#8c7457] font-mono block truncate">
+                          <span className="text-[9px] text-[#8c7457] font-mono block truncate" title={`8 + ${profBonus} (Prof) ${spellAbilityMod >= 0 ? `+ ${spellAbilityMod}` : spellAbilityMod} (${abilityLabelMap[spellcastingAbilityKey].substring(0,3).toUpperCase()}) ${character.spellSaveDcBonus ? (character.spellSaveDcBonus > 0 ? `+ ${character.spellSaveDcBonus}` : character.spellSaveDcBonus) : ''}`}>
                             8 + {profBonus} (Prof) {spellAbilityMod >= 0 ? `+ ${spellAbilityMod}` : spellAbilityMod} ({abilityLabelMap[spellcastingAbilityKey].substring(0,3).toUpperCase()}) {character.spellSaveDcBonus ? (character.spellSaveDcBonus > 0 ? `+ ${character.spellSaveDcBonus}` : character.spellSaveDcBonus) : ''}
                           </span>
                         </div>
 
                         {/* Ataque Mágico & Preparadas */}
-                        <div className="bg-[#120a06] border border-[#54412c] rounded-lg p-2.5 text-center flex flex-col justify-between min-w-0">
+                        <div className="bg-[#120a06] border border-[#54412c] rounded-lg p-2 text-center flex flex-col justify-between min-w-0">
                           <div>
-                            <span className="text-[10px] uppercase font-bold text-[#8c7457] font-serif block truncate">
+                            <span className="text-[0.7rem] uppercase font-bold text-[#8c7457] font-serif block whitespace-normal leading-[1.2] text-center">
                               Bônus de Ataque Mágico
                             </span>
                             <span className="text-xl font-serif font-black text-emerald-300 block my-0.5">
@@ -5774,101 +5802,11 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                             </span>
                           </div>
                           <div className="pt-1 border-t border-[#3d2a1b]/60 flex items-center justify-between text-[10px] text-[#eedbc5] font-serif">
-                            <span>Magias Preparadas:</span>
+                            <span>Preparadas:</span>
                             <strong className="text-amber-200">{preparedSpellsCount}</strong>
                           </div>
                         </div>
                       </div>
-
-                    {/* GERENCIADOR DE ESPAÇOS DE MAGIA (1º AO 9º NÍVEL) */}
-                    <div className="bg-[#140e09] border border-[#54412c] rounded-xl p-3 space-y-3">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#54412c]/60 pb-2">
-                        <span className="text-xs font-serif font-black uppercase text-[#d4af37] flex items-center gap-1.5 min-w-0">
-                          <Sparkles className="w-3.5 h-3.5 text-[#e8c679] flex-shrink-0" />
-                          <span className="truncate">Espaços de Conjuração (1º ao 9º Nível)</span>
-                        </span>
-                        <button
-                          type="button"
-                          onClick={handleResetAllSpellSlots}
-                          className="text-[11px] font-serif font-bold text-[#c49d48] hover:text-[#f5d77f] flex items-center gap-1 bg-[#261a12] px-2.5 py-1 rounded border border-[#54412c] cursor-pointer transition whitespace-nowrap self-start sm:self-auto flex-shrink-0"
-                          title="Restaurar todos os espaços de magia usados"
-                        >
-                          Restaurar Todos (Descanso Longo)
-                        </button>
-                      </div>
-
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((lvl) => {
-                          const slot = (character.spellSlots || []).find((s) => s.level === lvl) || {
-                            level: lvl,
-                            total: lvl === 1 ? 4 : lvl === 2 ? 3 : lvl === 3 ? 2 : 0,
-                            used: 0,
-                          };
-                          const available = Math.max(0, slot.total - slot.used);
-
-                          return (
-                            <div
-                              key={lvl}
-                              className="bg-[#120a06] p-3 rounded-xl border border-[#54412c] flex flex-col justify-between gap-2 text-xs min-w-0 box-border shadow-inner"
-                            >
-                              <div className="flex items-center justify-between border-b border-[#3d2a1b]/60 pb-1.5 min-w-0">
-                                <span className="text-xs text-[#c49d48] font-bold font-serif whitespace-nowrap">
-                                  {lvl}º Nível
-                                </span>
-                                <div className="flex items-center gap-1.5 text-[10px] text-[#8c7457] font-mono flex-shrink-0">
-                                  <span className="whitespace-nowrap">Total:</span>
-                                  <input
-                                    type="text"
-                                    inputMode="numeric"
-                                    value={slot.total}
-                                    onChange={(e) => {
-                                      const val = Math.max(0, parseInt(e.target.value.replace(/\D/g, '') || '0', 10));
-                                      handleUpdateSpellSlotTotal(lvl, val);
-                                    }}
-                                    className="w-7 text-center bg-[#1a120b] border border-[#54412c] rounded text-amber-200 font-bold focus:outline-none focus:border-[#c49d48]"
-                                  />
-                                </div>
-                              </div>
-
-                              {/* Steppers de Uso */}
-                              <div className="flex items-center justify-between gap-1 w-full bg-[#180f0a] px-2 py-1 rounded-lg border border-[#3d2a1b] box-border">
-                                <button
-                                  type="button"
-                                  onClick={() => handleAdjustSpellSlotUsed(lvl, -1)}
-                                  disabled={slot.used <= 0}
-                                  className="w-5 h-5 flex items-center justify-center bg-[#261a12] border border-[#54412c] rounded text-stone-300 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed font-bold flex-shrink-0 cursor-pointer text-xs"
-                                  title="Restaurar 1 espaço"
-                                >
-                                  -
-                                </button>
-                                <div className="flex items-center gap-1 font-mono text-[11px] font-black text-[#eedbc5] whitespace-nowrap">
-                                  <span>{slot.used}</span>
-                                  <span className="text-[#8c7457]">/</span>
-                                  <span>{slot.total}</span>
-                                  <span className="text-[9px] text-[#8c7457] font-serif ml-0.5">gastos</span>
-                                </div>
-                                <button
-                                  type="button"
-                                  onClick={() => handleAdjustSpellSlotUsed(lvl, 1)}
-                                  disabled={slot.used >= slot.total && slot.total > 0}
-                                  className="w-5 h-5 flex items-center justify-center bg-[#261a12] border border-[#54412c] rounded text-stone-300 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed font-bold flex-shrink-0 cursor-pointer text-xs"
-                                  title="Gastar 1 espaço"
-                                >
-                                  +
-                                </button>
-                              </div>
-
-                              {/* Badge de Disponibilidade com bom respiro lateral */}
-                              <div className={`text-[10px] font-mono font-bold py-1 px-2 rounded-lg text-center w-full box-border truncate ${
-                                available > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/60' : 'bg-red-950/80 text-red-300 border border-red-900/60'
-                              }`}>
-                                {available} disponív{available === 1 ? 'el' : 'eis'}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
 
                     {/* FILTROS DE NÍVEL E BUSCA RESPONSIVA */}
                     <div className="space-y-2">
@@ -5915,10 +5853,10 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                     {/* LISTA DE MAGIAS */}
                     <div className="space-y-2.5 max-h-[500px] overflow-y-auto pr-1">
                       {filteredSpells.length === 0 ? (
-                        <div className="bg-[#140e09] border border-[#54412c] rounded-xl p-6 text-center space-y-2">
-                          <p className="text-xs text-[#8c7457] italic font-serif">
+                        <div className="bg-[#140e09] border border-dashed border-[#54412c] rounded-xl p-6 text-center space-y-2">
+                          <p className="text-xs text-[#eedbc5] font-serif font-semibold">
                             {allSpells.length === 0
-                              ? 'Nenhuma magia cadastrada no grimório. Clique em "+ Nova Magia" acima para começar!'
+                              ? 'Nenhum feitiço ou ritual preparado. Clique em "+ Nova Magia".'
                               : 'Nenhuma magia encontrada com os filtros selecionados.'}
                           </p>
                         </div>
@@ -6072,28 +6010,28 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
 
                 return (
                   <div className="bg-[#1a120b]/95 border-2 border-[#8c6b32]/60 rounded-2xl p-4 shadow-2xl space-y-3 select-none">
-                    <div className="flex items-center justify-between border-b-2 border-[#54412c]/60 pb-2.5">
+                    <div className="flex items-center justify-between gap-3 flex-wrap border-b-2 border-[#54412c]/60 pb-2.5">
                       <div className="flex items-center gap-2">
-                        <Backpack className="w-4 h-4 text-[#e8c679]" />
+                        <Backpack className="w-4 h-4 text-[#e8c679] flex-shrink-0" />
                         <span className="font-serif font-black text-xs sm:text-sm uppercase tracking-wider text-[#d4af37]">
                           Inventário &amp; Equipamento
                         </span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#2a1d13] text-[#e8c679] border border-[#8c6b32] font-mono font-bold">
+                      </div>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <span className="relative inline-flex items-center justify-center px-2.5 py-1 rounded-full bg-[#2a1d13] text-[#e8c679] border border-[#8c6b32] font-mono font-bold text-[0.7rem] whitespace-nowrap min-w-fit">
                           {inventoryItemsList.length} item(ns) ({grandTotalWeightKg} kg)
                         </span>
-                      </div>
-                      <div className="flex items-center gap-2">
                         <button
                           type="button"
                           onClick={handleOpenCreateInventoryItemModal}
-                          className="flex items-center gap-1 px-2.5 py-1 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-[11px] rounded-lg shadow transition cursor-pointer"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-serif font-black text-[0.75rem] rounded-lg shadow transition cursor-pointer whitespace-nowrap flex-shrink-0"
                         >
                           <Plus className="w-3.5 h-3.5" /> + Adicionar Item
                         </button>
                         <button
                           type="button"
                           onClick={() => handleToggleCategoryCollapse('inventario')}
-                          className="flex items-center gap-1 px-2.5 py-1 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer"
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#120a06] hover:bg-[#261a12] text-[#eedbc5] border border-[#54412c] font-serif font-bold text-[11px] rounded-lg transition cursor-pointer flex-shrink-0"
                           title={isCardCollapsed('inventario') ? 'Expandir card de inventário' : 'Reduzir card de inventário para economizar espaço'}
                         >
                           {isCardCollapsed('inventario') ? (
@@ -6353,12 +6291,12 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                     {/* Lista de Itens do Inventário */}
                     <div className="space-y-2">
                       {filteredInventory.length === 0 ? (
-                        <div className="text-center py-8 px-4 bg-[#140d08] border-2 border-dashed border-[#54412c] rounded-xl space-y-2">
-                          <Backpack className="w-8 h-8 text-[#8c7457] mx-auto opacity-60" />
+                        <div className="text-center py-6 px-4 bg-[#140d08] border border-dashed border-[#54412c] rounded-xl space-y-2">
+                          <Backpack className="w-6 h-6 text-[#8c7457] mx-auto opacity-60" />
                           <p className="text-xs text-[#eedbc5] font-serif font-semibold">
                             {inventorySearchQuery || inventoryCategoryFilter !== 'all'
                               ? 'Nenhum item encontrado com o filtro selecionado.'
-                              : 'Nenhum item cadastrado no inventário.'}
+                              : 'Mochila vazia.'}
                           </p>
                           <button
                             type="button"

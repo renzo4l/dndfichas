@@ -67,34 +67,25 @@ export function createBlankCharacter(name = 'Novo Aventureiro'): CharacterSheet 
     proficiencyBonus: prof,
     passivePerception: 10,
 
-    armorClass: 16,
-    armorClassType: 'Cota de Malha',
+    armorClass: 10,
+    armorClassType: 'Nenhuma',
     initiative: 0,
     speed: 9,
-    maxHp: 12,
-    currentHp: 12,
+    maxHp: 10,
+    currentHp: 10,
     tempHp: 0,
-    hitDiceTotal: '1d10',
-    hitDiceCurrent: '1d10',
+    hitDiceTotal: '1d8',
+    hitDiceCurrent: '1d8',
     deathSaves: { successes: 0, failures: 0 },
 
-    attacks: [
-      {
-        id: 'atk_1',
-        name: 'Espada Longa',
-        attackBonus: 4,
-        damage: '1d8 + 2',
-        damageType: 'Cortante',
-        notes: 'Versátil (1d10)',
-      },
-    ],
+    attacks: [],
 
     skills: skillsRecord,
 
     spellSlots: [
-      { level: 1, total: 4, used: 0 },
-      { level: 2, total: 3, used: 0 },
-      { level: 3, total: 2, used: 0 },
+      { level: 1, total: 0, used: 0 },
+      { level: 2, total: 0, used: 0 },
+      { level: 3, total: 0, used: 0 },
       { level: 4, total: 0, used: 0 },
       { level: 5, total: 0, used: 0 },
       { level: 6, total: 0, used: 0 },
@@ -102,83 +93,25 @@ export function createBlankCharacter(name = 'Novo Aventureiro'): CharacterSheet 
       { level: 8, total: 0, used: 0 },
       { level: 9, total: 0, used: 0 },
     ],
-    spells: [
-      {
-        id: 'sp_1',
-        name: 'Raio de Fogo',
-        level: 0,
-        school: 'Evocação',
-        castingTime: '1 Ação',
-        range: '36m',
-        components: 'V, S',
-        duration: 'Instantâneo',
-        description: 'Lança um feixe flamejante. Faça um ataque com magia. Em um acerto, o alvo sofre 1d10 de dano de fogo.',
-        prepared: true,
-      },
-      {
-        id: 'sp_2',
-        name: 'Míssil Mágico',
-        level: 1,
-        school: 'Evocação',
-        castingTime: '1 Ação',
-        range: '36m',
-        components: 'V, S',
-        duration: 'Instantâneo',
-        description: 'Cria 3 dardos mágicos infalíveis. Cada dardo causa 1d4+1 de dano de energia.',
-        prepared: true,
-      },
-      {
-        id: 'sp_3',
-        name: 'Bola de Fogo',
-        level: 3,
-        school: 'Evocação',
-        castingTime: '1 Ação',
-        range: '45m',
-        components: 'V, S, M (guano e enxofre)',
-        duration: 'Instantâneo',
-        description: 'Explosão flamejante em esfera de 6m. Alvos fazem teste de resistência de Destreza ou sofrem 8d6 de dano de fogo.',
-        prepared: true,
-      },
-    ],
+    spells: [],
 
-    personalityTraits: 'Sempre calmo diante do perigo.',
-    ideals: 'Proteção: O fraco deve ser protegido pelo forte.',
-    bonds: 'Minha espada foi dada pelo meu comandante antes de sua morte.',
-    flaws: 'Raramente recuo de um desafio com honra.',
-    featuresAndTraits: 'Estilo de Luta: Defesa (+1 na CA quando usando armadura).\nRetomar o Fôlego: 1d10 + nível por descanso curto.',
-    featuresList: [
-      {
-        id: 'feat_1',
-        name: 'Estilo de Luta: Defesa',
-        description: 'Você recebe +1 de bônus na sua Classe de Armadura enquanto estiver usando uma armadura.',
-        source: 'Classe (Guerreiro)',
-        isExpanded: true,
-      },
-      {
-        id: 'feat_2',
-        name: 'Retomar o Fôlego',
-        description: 'Em seu turno, você pode usar uma ação bônus para recuperar pontos de vida iguais a 1d10 + seu nível de guerreiro. Você precisa terminar um descanso curto ou longo para usar este traço novamente.',
-        source: 'Classe (Guerreiro)',
-        cost: '1/Descanso Curto',
-        isExpanded: false,
-      },
-    ],
-    proficienciesAndLanguages: 'Todas as armaduras, escudos, armas simples e marciais.\nIdiomas: Comum, Élfico.',
-    equipment: 'Cota de malha, espada longa, escudo (+2 CA), mochila de aventureiro, poção de cura (2x), ração de viagem, tochas.',
-    inventoryList: [
-      { id: 'inv_1', name: 'Cota de Malha', quantity: 1, weightKg: 25, category: 'Armadura', equipped: true, description: 'CA 16 (sem des)' },
-      { id: 'inv_2', name: 'Espada Longa', quantity: 1, weightKg: 1.5, category: 'Arma', equipped: true, description: '1d8 cortante (versátil 1d10)' },
-      { id: 'inv_3', name: 'Escudo', quantity: 1, weightKg: 3, category: 'Armadura', equipped: true, description: '+2 na CA' },
-      { id: 'inv_4', name: 'Mochila de Aventureiro', quantity: 1, weightKg: 2, category: 'Geral', equipped: true },
-      { id: 'inv_5', name: 'Poção de Cura Rápida', quantity: 2, weightKg: 0.25, category: 'Poção', description: 'Recupera 2d4+2 PV' },
-      { id: 'inv_6', name: 'Ração de Viagem (1 dia)', quantity: 5, weightKg: 0.5, category: 'Ração' },
-      { id: 'inv_7', name: 'Tochas', quantity: 10, weightKg: 0.4, category: 'Geral' },
-    ],
+    personalityTraits: '',
+    ideals: '',
+    bonds: '',
+    flaws: '',
+    backstory: '',
+    featuresAndTraits: '',
+    featuresList: [],
+    proficienciesAndLanguages: '',
+    equipment: '',
+    inventoryList: [],
     maxWeightBonus: 0,
-    coins: { pc: 0, pp: 5, pe: 0, po: 25, pl: 0 },
+    coins: { pc: 0, pp: 0, pe: 0, po: 0, pl: 0 },
 
     homebrews: [],
     dmNotes: '',
+    activeConditions: [],
+    exhaustionLevel: 0,
     updatedAt: new Date().toISOString(),
     createdAt: new Date().toISOString(),
   };
@@ -202,7 +135,65 @@ export function getCurrentUserId(): string {
 export function getSavedCharacters(): CharacterSheet[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.CHARACTERS);
-    return raw ? JSON.parse(raw) : [];
+    if (!raw) return [];
+    const parsed: CharacterSheet[] = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+
+    // Limpeza automática de personagens antigos mockados caso ainda possuam os dados padrão
+    let hasChanges = false;
+    const sanitized = parsed.map((char) => {
+      let c = { ...char };
+      // Se possui habilidades mockadas padrão (ex: feat_1 'Estilo de Luta: Defesa', feat_2 'Retomar o Fôlego')
+      if (c.featuresList && c.featuresList.some(f => f.id === 'feat_1' || f.name === 'Estilo de Luta: Defesa')) {
+        c.featuresList = c.featuresList.filter(f => f.id !== 'feat_1' && f.id !== 'feat_2' && f.name !== 'Estilo de Luta: Defesa' && f.name !== 'Retomar o Fôlego');
+        if (c.featuresAndTraits && c.featuresAndTraits.includes('Estilo de Luta: Defesa')) {
+          c.featuresAndTraits = '';
+        }
+        hasChanges = true;
+      }
+      // Se possui magias mockadas padrão (sp_1, sp_2, sp_3)
+      if (c.spells && c.spells.some(s => s.id === 'sp_1' || s.name === 'Raio de Fogo' || s.name === 'Míssil Mágico' || s.name === 'Bola de Fogo')) {
+        c.spells = c.spells.filter(s => s.id !== 'sp_1' && s.id !== 'sp_2' && s.id !== 'sp_3');
+        hasChanges = true;
+      }
+      // Se possui ataque mockado padrão (atk_1 Espada Longa com nota Versátil)
+      if (c.attacks && c.attacks.some(a => a.id === 'atk_1' && a.name === 'Espada Longa')) {
+        c.attacks = c.attacks.filter(a => a.id !== 'atk_1');
+        hasChanges = true;
+      }
+      // Se possui inventário mockado padrão (inv_1 a inv_7)
+      if (c.inventoryList && c.inventoryList.some(i => i.id === 'inv_1' || i.id === 'inv_2')) {
+        c.inventoryList = c.inventoryList.filter(i => !['inv_1', 'inv_2', 'inv_3', 'inv_4', 'inv_5', 'inv_6', 'inv_7'].includes(i.id));
+        if (c.equipment && c.equipment.includes('Cota de malha, espada longa')) {
+          c.equipment = '';
+        }
+        hasChanges = true;
+      }
+      // Se possui traços de personalidade mockados
+      if (c.personalityTraits === 'Sempre calmo diante do perigo.') {
+        c.personalityTraits = '';
+        hasChanges = true;
+      }
+      if (c.ideals === 'Proteção: O fraco deve ser protegido pelo forte.') {
+        c.ideals = '';
+        hasChanges = true;
+      }
+      if (c.bonds === 'Minha espada foi dada pelo meu comandante antes de sua morte.') {
+        c.bonds = '';
+        hasChanges = true;
+      }
+      if (c.flaws === 'Raramente recuo de um desafio com honra.') {
+        c.flaws = '';
+        hasChanges = true;
+      }
+      return c;
+    });
+
+    if (hasChanges) {
+      saveCharacters(sanitized);
+      return sanitized;
+    }
+    return parsed;
   } catch {
     return [];
   }
