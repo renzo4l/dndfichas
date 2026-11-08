@@ -211,8 +211,8 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
   const [skillSearchQuery, setSkillSearchQuery] = useState<string>('');
   const [savedShortcuts, setSavedShortcuts] = useState<SavedRollShortcut[]>(() => getSavedRollShortcuts());
   
-  // Floating Modal State for C.R.I.S. Attacks, Multi-Dice, Stackable Advantages and Extra Damage Types
-  const [showCrisAttackModal, setShowCrisAttackModal] = useState<boolean>(false);
+  // Floating Modal State for Archdice Attacks, Multi-Dice, Stackable Advantages and Extra Damage Types
+  const [showArchdiceAttackModal, setShowArchdiceAttackModal] = useState<boolean>(false);
   const [editingAttackId, setEditingAttackId] = useState<string | null>(null);
   const [modalAttackName, setModalAttackName] = useState<string>('Novo Ataque');
   const [modalDamage, setModalDamage] = useState<string>('1d4');
@@ -536,7 +536,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
 
     // 2. Verificar localStorage
     try {
-      const saved = localStorage.getItem(`cris_card_columns_${character.id}`);
+      const saved = localStorage.getItem(`archdice_card_columns_${character.id}`);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length === 3) {
@@ -585,8 +585,8 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
     setCardOrder(flatOrder);
 
     try {
-      localStorage.setItem(`cris_card_columns_${character.id}`, JSON.stringify(cleanedCols));
-      localStorage.setItem(`cris_card_order_${character.id}`, JSON.stringify(flatOrder));
+      localStorage.setItem(`archdice_card_columns_${character.id}`, JSON.stringify(cleanedCols));
+      localStorage.setItem(`archdice_card_order_${character.id}`, JSON.stringify(flatOrder));
     } catch (e) {
       // Ignorar erro
     }
@@ -1500,7 +1500,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
     setModalExtraDamages([]);
     setModalImageUrl('');
     setModalSaveAsShortcut(true);
-    setShowCrisAttackModal(true);
+    setShowArchdiceAttackModal(true);
   };
 
   const handleOpenEditAttackModal = (atk: WeaponAttack) => {
@@ -1520,7 +1520,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
     setModalExtraDamages(atk.extraDamage ? [...atk.extraDamage] : []);
     setModalImageUrl(atk.imageUrl || '');
     setModalSaveAsShortcut(true);
-    setShowCrisAttackModal(true);
+    setShowArchdiceAttackModal(true);
   };
 
   const handleAddExtraDamage = () => {
@@ -1550,7 +1550,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
     onQuickRoll(modalComputedDamageFormula, label);
   };
 
-  const handleSaveCrisAttack = () => {
+  const handleSaveArchdiceAttack = () => {
     const attackName = modalAttackName.trim() || 'Novo Ataque';
     const advLevel = modalAdvantageCount > 0 ? modalAdvantageCount : (modalDisadvantageCount > 0 ? -modalDisadvantageCount : 0);
 
@@ -1612,7 +1612,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
       saveRollShortcuts(updatedShortcuts);
     }
 
-    setShowCrisAttackModal(false);
+    setShowArchdiceAttackModal(false);
   };
 
   const handleDeleteShortcut = (id: string) => {
@@ -2390,11 +2390,11 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
         </div>
       )}
 
-      {/* Modal Flutuante C.R.I.S. para Ataques, Atalhos, Vantagens Múltiplas e Dano Extra Separado */}
-      {showCrisAttackModal && (
+      {/* Modal Flutuante Archdice para Ataques, Atalhos, Vantagens Múltiplas e Dano Extra Separado */}
+      {showArchdiceAttackModal && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
           <div className="bg-[#141210] border-2 border-[#8c6b32] rounded-2xl max-w-xl w-full p-5 sm:p-6 space-y-4 shadow-2xl text-[#f4ecd8] font-serif max-h-[92vh] overflow-y-auto">
-            {/* Cabeçalho do Modal no estilo C.R.I.S. */}
+            {/* Cabeçalho do Modal no estilo Archdice */}
             <div className="flex items-center justify-between border-b border-[#54412c]/60 pb-3">
               <div>
                 <h3 className="font-sans font-black text-xl sm:text-2xl text-[#f4ecd8] tracking-tight">
@@ -2406,7 +2406,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
               </div>
               <button
                 type="button"
-                onClick={() => setShowCrisAttackModal(false)}
+                onClick={() => setShowArchdiceAttackModal(false)}
                 className="p-1.5 rounded-lg text-[#8c7457] hover:text-[#f4ecd8] hover:bg-[#251910] transition"
                 title="Fechar janela"
               >
@@ -2709,7 +2709,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
               </div>
             </div>
 
-            {/* Dano Extra: com tipos separados (conforme imagem de referência C.R.I.S.) */}
+            {/* Dano Extra: com tipos separados */}
             <div className="space-y-2 bg-[#1b1612] border border-[#54412c] rounded-xl p-3">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-sans font-bold text-[#f4ecd8] block">
@@ -2781,7 +2781,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
               )}
             </div>
 
-            {/* Imagem (conforme print C.R.I.S.) */}
+            {/* Imagem */}
             <div className="space-y-1">
               <label className="text-xs font-sans font-bold text-[#f4ecd8] block">
                 Imagem (URL ou Ícone)
@@ -2855,14 +2855,14 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => setShowCrisAttackModal(false)}
+                  onClick={() => setShowArchdiceAttackModal(false)}
                   className="px-3 py-1.5 text-xs text-[#8c7457] hover:text-[#eedbc5] font-sans transition cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="button"
-                  onClick={handleSaveCrisAttack}
+                  onClick={handleSaveArchdiceAttack}
                   className="px-4 py-2 bg-[#c49d48] hover:bg-[#b08a34] text-[#140d07] font-sans font-black text-xs rounded-lg transition border border-[#e8c679]/40 active:scale-95 shadow-md flex items-center gap-1.5 cursor-pointer"
                 >
                   <Check className="w-4 h-4" />
@@ -3471,7 +3471,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
 
       {/* Main Parchment Style Sheet Container */}
       <div className="bg-[#18130e] border-2 border-[#54412c] rounded-2xl shadow-2xl overflow-hidden p-4 sm:p-7 space-y-6">
-        {/* 1. Header do Personagem Integrado com Avatar, Campos de Linha Limpa e Barra de Vida Estendida (Estilo CRIS) */}
+        {/* 1. Header do Personagem Integrado com Avatar, Campos de Linha Limpa e Barra de Vida Estendida (Estilo Archdice) */}
         <div className="bg-[#1f1711] border border-[#54412c] rounded-2xl p-4 sm:p-6 space-y-5 shadow-xl">
           {/* Parte Superior: Avatar à Esquerda + Campos de Texto Alinhados à Direita */}
           <div className="flex flex-col md:flex-row items-center md:items-start gap-5 sm:gap-6">
@@ -3989,7 +3989,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                   <line x1="180" y1="180" x2="66" y2="114" stroke="#c49d48" strokeWidth="1" strokeOpacity="0.45" />
                 </svg>
 
-                {/* Medalhão Central Arcano: ATRIBUTOS (Idêntico ao C.R.I.S) */}
+                {/* Medalhão Central Arcano: ATRIBUTOS */}
                 <div
                   onClick={() => setShowAttributesEditModal(true)}
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 p-2 rounded-full bg-gradient-to-br from-[#1e140d] via-[#140d07] to-[#0c0805] border-2 border-[#8c6b32] shadow-[0_0_20px_rgba(196,157,72,0.3)] flex flex-col items-center justify-center text-center cursor-pointer hover:border-[#e8c679] hover:scale-105 transition-all duration-300 z-10 group box-border"
@@ -4035,7 +4035,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                         {/* Moldura circular interna */}
                         <div className="absolute inset-1 rounded-full border border-[#d4af37]/25 pointer-events-none" />
 
-                        {/* Modificador proeminente no centro (estilo CRIS) */}
+                        {/* Modificador proeminente no centro */}
                         <span className="font-serif font-black text-xl text-[#f4ecd8] group-hover:text-[#f5d77f] transition leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                           {formatModifier(mod)}
                         </span>
@@ -5190,7 +5190,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                                   type="button"
                                   onClick={() => handleOpenEditAttackModal(atk)}
                                   className="text-[#c49d48] hover:text-[#f4ecd8] hover:bg-[#2c1d12] p-1.5 rounded transition"
-                                  title="Editar ataque no painel C.R.I.S."
+                                  title="Editar ataque"
                                 >
                                   <Edit2 className="w-3.5 h-3.5" />
                                 </button>
@@ -5518,7 +5518,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                                 key={feat.id}
                                 className="bg-[#150e09] border border-[#54412c] hover:border-[#8c6b32] rounded-xl overflow-hidden shadow-md transition group"
                               >
-                                {/* Card Header Expandível (exatamente no estilo CRIS da imagem de referência) */}
+                                {/* Card Header Expandível */}
                                 <div
                                   onClick={() => handleToggleExpandFeature(feat.id)}
                                   className="px-3.5 py-2.5 bg-[#1e150e] hover:bg-[#281b12] border-b border-[#54412c]/50 flex items-center justify-between gap-2 cursor-pointer select-none transition"
@@ -6691,7 +6691,7 @@ export const CharacterSheetView: React.FC<CharacterSheetViewProps> = ({
                       Mesa de Dados &amp; Atalhos
                     </h4>
                     <span className="text-[9px] text-[#8c7457] font-mono">
-                      Rolador &amp; Atalhos Salvos C.R.I.S.
+                      Rolador &amp; Atalhos Salvos Archdice
                     </span>
                   </div>
                 </div>

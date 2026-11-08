@@ -24,7 +24,7 @@ export function calculateProficiencyBonus(level: number): number {
 }
 
 /**
- * Official D&D 5e damage types + Balístico (C.R.I.S.)
+ * Official D&D 5e damage types + Balístico (Archdice)
  */
 export const ALL_DND_DAMAGE_TYPES = [
   'Ácido',

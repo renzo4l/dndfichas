@@ -238,7 +238,7 @@ export const CampaignManager: React.FC<CampaignManagerProps> = ({
   );
 
   // -------------------------------------------------------------
-  // VIEW A: ACTIVE CAMPAIGN DETAILS (MATCHES image_ce4f43dd.png)
+  // VIEW A: ACTIVE CAMPAIGN DETAILS
   // -------------------------------------------------------------
   if (activeCampaign) {
     return (
@@ -370,7 +370,7 @@ export const CampaignManager: React.FC<CampaignManagerProps> = ({
           </div>
         </div>
 
-        {/* Sub-Navigation Tabs: Agentes / Personagens | Jogadores | Diário de Sessão (Cris style) */}
+        {/* Sub-Navigation Tabs: Agentes / Personagens | Jogadores | Diário de Sessão */}
         <div className="border-b border-[#3b2e20] flex items-center justify-between gap-4 overflow-x-auto">
           <div className="flex items-center gap-6">
             <button
@@ -461,7 +461,7 @@ export const CampaignManager: React.FC<CampaignManagerProps> = ({
         </div>
 
         {/* ------------------------------------------------------------------ */}
-        {/* TAB 1: PERSONAGENS - ONLY characters put in by players (image_ce4f43dd.png) */}
+        {/* TAB 1: PERSONAGENS - ONLY characters put in by players */}
         {/* ------------------------------------------------------------------ */}
         {activeTab === 'characters' && (
           <div className="space-y-4">
@@ -495,7 +495,7 @@ export const CampaignManager: React.FC<CampaignManagerProps> = ({
                 )}
               </div>
             ) : (
-              /* Character Cards Grid - Faithfully styled after Cris image_ce4f43dd.png */
+              /* Character Cards Grid */
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {activeCampaign.members.map((member) => {
                   const linkedChar = characters.find((c) => c.id === member.characterId);
@@ -1115,7 +1115,7 @@ export const CampaignManager: React.FC<CampaignManagerProps> = ({
   }
 
   // -------------------------------------------------------------
-  // VIEW B: CAMPAIGNS LIST (MATCHES Cris Image 3)
+  // VIEW B: CAMPAIGNS LIST
   // -------------------------------------------------------------
   const filteredCampaigns = campaigns.filter((c) => {
     if (!searchQuery.trim()) return true;
@@ -1160,7 +1160,7 @@ export const CampaignManager: React.FC<CampaignManagerProps> = ({
         </div>
       </div>
 
-      {/* Campaigns Grid (Cris Image 3 style cards) */}
+      {/* Campaigns Grid */}
       {campaigns.length === 0 ? (
         <div className="py-20 text-center bg-[#19140f] rounded-2xl border border-[#382b1d] p-8 space-y-4">
           <div className="w-16 h-16 rounded-2xl bg-[#292017] text-[#d4af37] border border-[#523f2b] flex items-center justify-center mx-auto shadow-xl">
@@ -1191,7 +1191,7 @@ export const CampaignManager: React.FC<CampaignManagerProps> = ({
                 key={camp.id}
                 className="bg-[#1e140d]/95 hover:bg-[#261a12] border border-[#8c6b32]/50 hover:border-[#c49d48] rounded-xl overflow-hidden shadow-2xl transition-all duration-200 flex flex-col justify-between group"
               >
-                {/* Banner Thumbnail (Cris Image 3 Style) */}
+                {/* Banner Thumbnail */}
                 <div className="h-44 bg-[#0d0a08] relative overflow-hidden">
                   <img
                     src={camp.bannerUrl || DEFAULT_BANNER}
@@ -1343,7 +1343,7 @@ export const CampaignManager: React.FC<CampaignManagerProps> = ({
                   rows={4}
                   value={newCampDesc}
                   onChange={(e) => setNewCampDesc(e.target.value)}
-                  placeholder="Breve resumo da aventura para os jogadores (como no exemplo do Cris)..."
+                  placeholder="Breve resumo da aventura para os jogadores..."
                   className="w-full bg-[#110e0b] border border-[#4a3928] rounded-lg px-3 py-2 text-sm text-[#eedbc5]"
                 />
               </div>

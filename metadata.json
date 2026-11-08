@@ -1,6 +1,6 @@
 {
-  "name": "D&D 5e Fichas & Campanhas",
+  "name": "Archdice - D&D 5e Fichas & Campanhas",
   "description": "Fichas de RPG D&D 5e com cálculos automáticos, suporte a homebrew, gerenciamento de campanhas com código único, logs de sessão e integração com Google Drive.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

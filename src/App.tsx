@@ -379,25 +379,25 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-transparent text-[#f4ecd8] flex flex-col font-serif selection:bg-[#c49d48]/40 selection:text-white">
-      {/* CRIS Authentic Top Header Navigation Bar (matching image_a1a22b16.png) */}
+      {/* Archdice Authentic Top Header Navigation Bar */}
       <header className="bg-[#1a120b]/92 backdrop-blur-md border-b border-[#3d2a1b] sticky top-0 z-40 select-none shadow-2xl">
         <div className="w-full px-4 sm:px-8 flex items-center justify-between h-16">
           {/* Logo & Brand */}
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#c49d48] to-[#6e4e1a] flex items-center justify-center text-[#140d07] shadow-lg shadow-[#140d07]/60 font-black text-sm border border-[#e8c679]/60 font-serif">
-              CRIS
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#c49d48] to-[#6e4e1a] flex items-center justify-center text-[#140d07] shadow-lg shadow-[#140d07]/60 font-black text-xs border border-[#e8c679]/60 font-serif tracking-wider">
+              ARCH
             </div>
             <div className="hidden sm:block">
               <div className="font-serif font-black text-[#f7eedc] text-base tracking-wide flex items-center gap-1.5">
-                <span>CRIS 5E</span>
+                <span>ARCHDICE</span>
                 <span className="text-[9px] uppercase font-bold px-1.5 py-0.2 bg-[#2a1d13] text-[#d4af37] border border-[#8c6b32]/60 rounded">
-                  D&amp;D
+                  D&amp;D 5E
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Navigation Links - Exactly matching image_a1a22b16.png */}
+          {/* Navigation Links */}
           <nav className="flex items-center gap-4 sm:gap-8 h-full">
             <button
               onClick={() => handleNavigate('characters_list')}
@@ -494,13 +494,13 @@ export default function App() {
           </div>
         </div>
 
-        {/* Signature Cris Gold Accent Underline Bar */}
+        {/* Signature Archdice Gold Accent Underline Bar */}
         <div className="h-[2px] w-full bg-gradient-to-r from-amber-700 via-[#c49d48] via-[#f5d77f] via-[#c49d48] to-amber-800 opacity-90 shadow-[0_0_8px_rgba(196,157,72,0.4)]" />
       </header>
 
       {/* Main Content Area */}
       <main className="w-full min-h-screen px-4 sm:px-8 py-6 flex-1 overflow-y-auto">
-        {/* VIEW 1: Characters Grid List (Cris Image 1) */}
+        {/* VIEW 1: Characters Grid List */}
         {currentView === 'characters_list' && (
           <CharacterListView
             characters={characters}
@@ -540,7 +540,7 @@ export default function App() {
           )
         )}
 
-        {/* VIEW 3: Campaigns Grid & Details (Cris Image 3 & Details Image ce4f43dd.png) */}
+        {/* VIEW 3: Campaigns Grid & Details */}
         {currentView === 'campaigns' && (
           <CampaignManager
             campaigns={campaigns}
@@ -571,7 +571,7 @@ export default function App() {
           />
         )}
 
-        {/* VIEW 4: Homebrew Manager (Cris Image 4) */}
+        {/* VIEW 4: Homebrew Manager */}
         {currentView === 'homebrew' && (
           <HomebrewManager
             homebrews={homebrews}
@@ -639,7 +639,7 @@ export default function App() {
         }}
       />
 
-      {/* CRIS Style Floating Dice Roll Toast Stack (Fixed bottom-right, max 3) */}
+      {/* Archdice Style Floating Dice Roll Toast Stack (Fixed bottom-right, max 3) */}
       <DiceRollResultManager
         toasts={rollToasts}
         onDismissToast={handleDismissToast}

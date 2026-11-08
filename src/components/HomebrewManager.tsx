@@ -114,7 +114,7 @@ export const HomebrewManager: React.FC<HomebrewManagerProps> = ({
 
   return (
     <div className="space-y-6 pb-20 max-w-7xl mx-auto">
-      {/* Sub-navigation Tabs Bar (Cris Image 2 & 4 Style in Parchment) */}
+      {/* Sub-navigation Tabs Bar */}
       <div className="border-b border-[#382b1d] pb-1">
         <nav className="flex space-x-6 overflow-x-auto">
           {[
@@ -143,7 +143,7 @@ export const HomebrewManager: React.FC<HomebrewManagerProps> = ({
         </nav>
       </div>
 
-      {/* Top Header: Count & Add Button (Cris Image 4 Style) */}
+      {/* Top Header: Count & Add Button */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-serif font-black text-[#f7eedc] tracking-tight">
@@ -175,7 +175,7 @@ export const HomebrewManager: React.FC<HomebrewManagerProps> = ({
         />
       </div>
 
-      {/* List of Banner Cards (Cris Image 4 Style) */}
+      {/* List of Banner Cards */}
       {homebrews.length === 0 ? (
         <div className="py-20 text-center bg-[#18130e] rounded-2xl border border-[#382b1d] p-8 space-y-4">
           <div className="w-16 h-16 rounded-2xl bg-[#292017] text-[#d4af37] border border-[#523f2b] flex items-center justify-center mx-auto shadow-xl">

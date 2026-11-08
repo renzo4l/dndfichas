@@ -92,24 +92,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="h-16 flex items-center justify-between px-4 border-b border-[#2d2217]">
           {!collapsed && (
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#c49d48] to-[#6e4e1a] flex items-center justify-center text-[#140d07] shadow-lg shadow-[#140d07]/60 font-black text-sm border border-[#e8c679]/60 font-serif">
-                CRIS
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#c49d48] to-[#6e4e1a] flex items-center justify-center text-[#140d07] shadow-lg shadow-[#140d07]/60 font-black text-xs border border-[#e8c679]/60 font-serif tracking-wider">
+                ARCH
               </div>
               <div>
                 <div className="font-serif font-black text-[#f7eedc] text-base tracking-wide flex items-center gap-1.5">
-                  <span>CRIS 5E</span>
+                  <span>ARCHDICE</span>
                   <span className="text-[9px] uppercase font-bold px-1.5 py-0.2 bg-[#2a1d13] text-[#d4af37] border border-[#8c6b32]/60 rounded">
-                    D&amp;D
+                    D&amp;D 5E
                   </span>
                 </div>
-                <p className="text-[10px] text-[#9d8a74]">Sistema Arcaico &amp; Fichas</p>
+                <p className="text-[10px] text-[#9d8a74]">Sistema de Fichas &amp; Mesa</p>
               </div>
             </div>
           )}
 
           {collapsed && (
-            <div className="w-9 h-9 mx-auto rounded-lg bg-gradient-to-br from-[#c49d48] to-[#6e4e1a] flex items-center justify-center text-[#140d07] shadow-lg font-black text-xs border border-[#e8c679]/60 font-serif">
-              CRIS
+            <div className="w-9 h-9 mx-auto rounded-lg bg-gradient-to-br from-[#c49d48] to-[#6e4e1a] flex items-center justify-center text-[#140d07] shadow-lg font-black text-xs border border-[#e8c679]/60 font-serif tracking-wider">
+              ARCH
             </div>
           )}
 

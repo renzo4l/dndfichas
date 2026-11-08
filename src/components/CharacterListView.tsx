@@ -109,7 +109,7 @@ export const CharacterListView: React.FC<CharacterListViewProps> = ({
           Nenhum personagem corresponde à busca "{searchQuery}".
         </div>
       ) : (
-        /* 2. Grid de exibição de fichas em 3 colunas responsivas (Idêntico ao CRIS) */
+        /* 2. Grid de exibição de fichas em 3 colunas responsivas */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((char) => (
             <div
