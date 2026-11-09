@@ -59,6 +59,7 @@ export interface Spell {
   duration: string;
   description: string;
   prepared: boolean;
+  damageFormula?: string;
   isHomebrew?: boolean;
 }
 
@@ -116,6 +117,7 @@ export interface CharacterSheet {
   abilities: Record<AbilityName, AbilityScore>;
   proficiencyBonus: number; // calculated from level, but can have override
   passivePerception: number;
+  inspiration?: boolean;
 
   // Combat
   armorClass: number;

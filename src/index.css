@@ -9,18 +9,48 @@
   --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+}
+
 body {
   font-family: var(--font-serif);
+  background-color: #140d08;
+  color: #f4ecd8;
+  min-height: 100vh;
+  letter-spacing: 0.015em;
+  position: relative;
+}
+
+/* 
+  OTIMIZAÇÃO DE PERFORMANCE DE SCROLL:
+  Substitui 'background-attachment: fixed' no body por uma camada de composição GPU dedicada.
+  Elimina o repaint frame-a-frame da textura pesada de 2MB durante a rolagem do navegador.
+*/
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
   background-color: #140d08;
   background-image: 
     linear-gradient(to bottom, rgba(18, 13, 9, 0.86), rgba(24, 17, 12, 0.90)), 
     url('/textures/parchment.png');
   background-size: cover;
-  background-attachment: fixed;
   background-position: center;
-  color: #f4ecd8;
-  min-height: 100vh;
-  letter-spacing: 0.015em;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Otimização de renderização de cards fora da tela para eliminar jank de scroll */
+.sheet-card-optimized {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 450px;
 }
 
 /* Parchment Texture Mesa & Container Styling */
@@ -60,7 +90,7 @@ body {
   background: #d4af37;
 }
 
-/* Remove spin buttons / arrows globally from number inputs (Opção 1) */
+/* Remove spin buttons / arrows globally from number inputs */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button,
 input::-webkit-outer-spin-button,
@@ -75,4 +105,3 @@ input[type="number"],
   -moz-appearance: textfield !important;
   appearance: textfield !important;
 }
-
